@@ -4,7 +4,7 @@
 ![Campground Wireframe](images/Project%202%20(1).png)
 
 ## ERD
-![Campground-ERD](images/Project%202%20ERD%20(1).png)
+![Campground-ERD](images/Project%202%20ERD%20(2).png)
 
 ## User Stories
 **MVP**
