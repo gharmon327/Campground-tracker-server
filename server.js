@@ -8,6 +8,7 @@ const PORT = 8002
 const campgroundRoutes = require('./routes/campground-routes')
 const campsiteRoutes = require('./routes/campsite-routes')
 const userRoutes = require('./routes/user-routes')
+const campsiteSeed = require('./lib/campsite-seed')
 
 mongoose.set('strictQuery', true)
 mongoose.connect(db, {
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use(campgroundRoutes)
 app.use(campsiteRoutes)
 app.use(userRoutes)
+app.use('/seed', campsiteSeed)
 
 app.listen(PORT, () =>{
     console.log('listening on ' + PORT)
