@@ -33,7 +33,7 @@ router.get('/campgrounds/:id', (req, res, next) => {
 
 // CREATE
 // POST /campgrounds
-router.post('/campgrounds', (req, res, next) => {
+router.post('/campgrounds', requireToken, (req, res, next) => {
 	Campground.create(req.body.campground)
 		.then((campground) => {
 			res.status(201).json({ campground: campground })
@@ -43,7 +43,7 @@ router.post('/campgrounds', (req, res, next) => {
 
 // UPDATE
 // PATCH /campgrounds/id
-router.patch('/campgrounds/:id', (req, res, next) => {
+router.patch('/campgrounds/:id', requireToken, (req, res, next) => {
 	Campground.findById(req.params.id)
 		.then(handle404)
 		.then((campground) => {
@@ -55,7 +55,7 @@ router.patch('/campgrounds/:id', (req, res, next) => {
 
 // DESTROY
 // DELETE /campgrounds/id
-router.delete('/campgrounds/:id', (req, res, next) => {
+router.delete('/campgrounds/:id', requireToken, (req, res, next) => {
 	Campground.findById(req.params.id)
 		.then(handle404)
 		.then((campground) => {
