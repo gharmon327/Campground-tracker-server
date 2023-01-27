@@ -2,10 +2,10 @@
 const mongoose = require('mongoose')
 
 // Getting the Schema from Mongoose
-const Schema = mongoose.Schema
+// const Schema = mongoose.Schema
 
 // Creating a new campsite Schema
-const campsiteSchema = new Schema(
+const campsiteSchema = new mongoose.Schema(
 	{
         siteNumber: {
             type: Number,
@@ -15,6 +15,10 @@ const campsiteSchema = new Schema(
 			type: Boolean,
 			required: true,
 		},
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
 	},
 	{
 		timestamps: true,
@@ -23,7 +27,7 @@ const campsiteSchema = new Schema(
 
 // Creating a Mongoose Model called Campsite
 // Collection will be called campsites
-const Campsite = mongoose.model('Campsite', campsiteSchema)
+// const Campsite = mongoose.model('Campsite', campsiteSchema)
 
 // Exporting Campsite model to use elsewhere
-module.exports = Campsite
+module.exports = campsiteSchema

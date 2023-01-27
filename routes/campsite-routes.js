@@ -3,16 +3,36 @@ const express = require('express')
 const { handle404 } = require('../lib/custom-errors')
 
 // require the Model we just created
-const Campsite = require('../models/campsite')
+// const Campsite = require('../models/campsite')
+const Campground = require('../models/campground')
 const { requireToken } = require('../config/auth')
 
 // Creating a router for us to make paths on
 const router = express.Router()
 
+// CREATE
+// POST /campsites
+router.post('/campsites', requireToken, (req, res, next) => {
+    const campgroundId = req.body.campsite.campgroundId
+
+    const campsite = req.body.campsite
+    campsite.owner = req.user._id
+
+    Campground.findById(campgroundId)
+        .then(handle404)
+        .then((campground) => {
+            campground.campsite.push(req.body.campsite)
+
+            return campground.save()
+        })
+        .then((campsite) => res.status(201).json({campsite : campsite}))
+        .catch(next)
+})
+
 // INDEX
 // GET /campsites
 router.get('/campsites', (req, res, next) => {
-	Campsite.find()
+	Campground.find()
 		.then((campsites) => {
 			return campsites.map((campsite) => campsite)
 		})
@@ -32,14 +52,27 @@ router.get('/campsites/:id', (req, res, next) => {
 
 // CREATE
 // POST /campsites
-router.post('/campsites', (req, res, next) => {
+// router.post('/campsites', requireToken, (req, res, next) => {
+//     const campgroundId = req.body.campsite.campgroundId
 
-	Campsite.create(req.body.campsite)
-		.then((campsite) => {
-			res.status(201).json({ campsite: campsite })
-		})
-		.catch(next)
-})
+//     const campsite = req.body.campsite
+//     campsite.owner = req.user._id
+
+//     Campground.findById(campgroundId)
+//         .then(handle404)
+//         .then((campground) => {
+//             campground.campsites.push(req.body.campsite)
+
+//             return campground.save()
+//         })
+//         .then((campground) => res.status(201).json({campground : campground}))
+//         .catch(next)
+// 	// Campsite.create(req.body.campsite)
+// 	// 	.then((campsite) => {
+// 	// 		res.status(201).json({ campsite: campsite })
+// 	// 	})
+// 	// 	.catch(next)
+// })
 
 // UPDATE
 // PATCH /campsites/id

@@ -1,5 +1,6 @@
 // require mongoose
 const mongoose = require('mongoose')
+const campsiteSchema = require('./campsite')
 
 // Getting the Schema from Mongoose
 const Schema = mongoose.Schema
@@ -19,6 +20,11 @@ const campgroundSchema = new Schema(
 			type: Number,
 			required: false,
 		},
+        campsite: [campsiteSchema],
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
 	},
 	{
 		timestamps: true,
