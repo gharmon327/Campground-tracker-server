@@ -17,7 +17,7 @@ const campgroundSchema = new Schema(
 		},
         sites: {
 			type: Number,
-			required: true,
+			required: false,
 		},
 	},
 	{

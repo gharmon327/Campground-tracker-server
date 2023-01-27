@@ -5,6 +5,7 @@ const router = express.Router()
 
 const User = require('../models/user')
 const { createUserToken } = require('../config/auth')
+const user = require('../models/user')
 
 router.post('/sign-up', (req, res, next) => {
 	bcrypt
@@ -36,6 +37,7 @@ router.post('/sign-in', (req, res, next) => {
 		// a token that we'll in turn send to the client.
 		.then((token) => res.json({ token }))
 		.catch(next)
-});
+}
+);
 
 module.exports = router
