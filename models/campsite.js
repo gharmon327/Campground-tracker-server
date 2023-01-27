@@ -13,8 +13,12 @@ const campsiteSchema = new mongoose.Schema(
         },
 		isOccupied: {
 			type: Boolean,
-			required: true,
+			required: true
 		},
+        // campgroundId: {
+        //     type: String,
+        //     required: false
+        // },
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'

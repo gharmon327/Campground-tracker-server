@@ -29,6 +29,21 @@ router.post('/campsites', requireToken, (req, res, next) => {
         .catch(next)
 })
 
+// UPDATE
+router.patch('/campsites/:campsiteId', (req, res, next) => {
+    const campgroundId = req.body.campsite.campgroundId
+
+    Campground.findById(campgroundId)
+        .then(handle404)
+        .then((campground) => {
+            const campsite = campground.campsite.id(req.params.campsiteId)
+            campsite.set(req.body.campsite)
+            return campground.save()
+        })
+        .then(() => res.sendStatus(204))
+        .catch(next)
+})
+
 // INDEX
 // GET /campsites
 router.get('/campsites', (req, res, next) => {
