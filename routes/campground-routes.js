@@ -47,8 +47,8 @@ router.post('/campgrounds', requireToken, (req, res, next) => {
 // UPDATE
 // PATCH /campgrounds/id
 router.patch('/campgrounds/:id', requireToken, (req, res, next) => {
-    // const campground = req.body.campground
-    console.log(res.user._id)
+    const campground = req.body.campground
+    // console.log(res.user._id)
     // if (campgrounds.owner !== req.user._id){
     //     return
     // }
