@@ -39,7 +39,6 @@ const requireToken = passport.authenticate('jwt', { session: false })
 // Create a function that takes the request and a user document
 // and uses them to create a token to send back to the user
 const createUserToken = (req, user) => {
-    // console.log(req.body)
 	if (
 		!user ||
 		!req.body.credentials.password ||
@@ -49,8 +48,7 @@ const createUserToken = (req, user) => {
 		err.statusCode = 422
 		throw err
 	}
-	// If no error was thrown, we create the token from user's id and
-	// return the token
+
 	return jwt.sign({ id: user._id }, secret, { expiresIn: 36000 })
 }
 

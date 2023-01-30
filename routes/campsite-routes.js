@@ -103,14 +103,19 @@ router.patch('/campsites/:id', (req, res, next) => {
 
 // DESTROY
 // DELETE /campgrounds/id
-router.delete('/campsites/:id', (req, res, next) => {
-	Campsite.findById(req.params.id)
-		.then(handle404)
-		.then((campsite) => {
-			campsite.deleteOne()
-		})
-		.then(() => res.sendStatus(204))
-		.catch(next)
-})
+// router.delete('/campsites/:id', (req, res, next) => {
+// 	const campgroundId = req.body.campsite.campgroundId
+
+// 	Campground.findById(campgroundId)
+// 		.then(handle404)
+// 		.then((campground) => {
+// 			campground.campsite.id(req.params.campsiteId).remove(campsite)
+// 			// const campsite = campground.campsite.id(req.params.campsiteId)
+//             // campsite.remove(req.body.campsite)
+// 			return campground.save()
+// 		})
+// 		.then(() => res.sendStatus(204))
+// 		.catch(next)
+// })
 
 module.exports = router
