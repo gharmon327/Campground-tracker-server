@@ -59,7 +59,10 @@ router.patch('/campgrounds/:id', requireToken, (req, res, next) => {
 			console.log(campground.owner.equals(req.user._id))
 			if (campground.owner.equals(req.user._id)) {
 				return campground.updateOne(req.body.campground)
-			}else{return}
+			}else{const err = new Error('Must be campground owner to Delete')
+			err.statusCode = 401
+			res.sendStatus(422)
+			throw err}
 		})
 		.then(() => res.sendStatus(204))
 		.catch(next)		
@@ -73,7 +76,9 @@ router.delete('/campgrounds/:id', requireToken, (req, res, next) => {
 		.then((campground) => {
 			if (campground.owner.equals(req.user._id)) {
 				return campground.deleteOne()
-			}else{return}
+			}else{const err = new Error('Must be campground owner to Delete')
+			err.statusCode = 422
+			throw err}
 		})
 		.then(() => res.sendStatus(204))
 		.catch(next)
