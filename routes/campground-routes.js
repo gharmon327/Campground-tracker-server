@@ -48,18 +48,21 @@ router.post('/campgrounds', requireToken, (req, res, next) => {
 // PATCH /campgrounds/id
 router.patch('/campgrounds/:id', requireToken, (req, res, next) => {
     const campground = req.body.campground
-    // console.log(res.user._id)
-    // if (campgrounds.owner !== req.user._id){
-    //     return
-    // }
 
 	Campground.findById(req.params.id)
 		.then(handle404)
 		.then((campground) => {
-			return campground.updateOne(req.body.campground)
+			console.log(req.user)
+			console.log(campground.owner)
+			console.log(req.user._id)
+			// if (campground.owner == req.user._id){console.log('true')}else{console.log('false')}
+			console.log(campground.owner.equals(req.user._id))
+			if (campground.owner.equals(req.user._id)) {
+				return campground.updateOne(req.body.campground)
+			}else{return}
 		})
 		.then(() => res.sendStatus(204))
-		.catch(next)
+		.catch(next)		
 })
 
 // DESTROY
@@ -68,7 +71,9 @@ router.delete('/campgrounds/:id', requireToken, (req, res, next) => {
 	Campground.findById(req.params.id)
 		.then(handle404)
 		.then((campground) => {
-			campground.deleteOne()
+			if (campground.owner.equals(req.user._id)) {
+				return campground.deleteOne()
+			}else{return}
 		})
 		.then(() => res.sendStatus(204))
 		.catch(next)
