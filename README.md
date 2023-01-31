@@ -1,4 +1,5 @@
 # Campground-tracker-server
+- The Campground tracker is an app that is meant for new or existing campground owners to have a place to keep track of the status of their campground/campsites. 
 
 ## Technologies Used
 - Javascript
