@@ -24,7 +24,6 @@ router.get('/campgrounds', (req, res, next) => {
 // SHOW
 // GET /campgrounds/id
 router.get('/campgrounds/:id', (req, res, next) => {
-	// req.params.id will be set based on the `:id` in the route
 	Campground.findById(req.params.id)
 		.then(handle404)
 		.then((campground) => res.status(200).json({ campground: campground }))
@@ -36,7 +35,6 @@ router.get('/campgrounds/:id', (req, res, next) => {
 router.post('/campgrounds', requireToken, (req, res, next) => {
     const campground = req.body.campground
     campground.owner = req.user._id
-    // console.log(campground.owner)
 	Campground.create(req.body.campground)
 		.then((campground) => {
 			res.status(201).json({ campground: campground })
@@ -52,11 +50,6 @@ router.patch('/campgrounds/:id', requireToken, (req, res, next) => {
 	Campground.findById(req.params.id)
 		.then(handle404)
 		.then((campground) => {
-			console.log(req.user)
-			console.log(campground.owner)
-			console.log(req.user._id)
-			// if (campground.owner == req.user._id){console.log('true')}else{console.log('false')}
-			console.log(campground.owner.equals(req.user._id))
 			if (campground.owner.equals(req.user._id)) {
 				return campground.updateOne(req.body.campground)
 			}else{const err = new Error('Must be campground owner to Delete')

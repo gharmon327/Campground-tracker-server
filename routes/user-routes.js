@@ -16,7 +16,6 @@ router.post('/sign-up', (req, res, next) => {
 				password: hash,
 			})
 		)
-		// create user with provided email and hashed password
 		.then((user) => User.create(user))
 		.then((user) => res.status(201).json(user))
 		.catch(next)
@@ -26,11 +25,7 @@ router.post('/sign-up', (req, res, next) => {
 // POST /sign-in
 router.post('/sign-in', (req, res, next) => {
 	User.findOne({ email: req.body.credentials.email })
-		// Pass the user and the request to createUserToken
 		.then((user) => createUserToken(req, user))
-		// createUserToken will either throw an error that
-		// will be caught by our error handler or send back
-		// a token that we'll in turn send to the client.
 		.then((token) => res.json({ token }))
 		.catch(next)
 }

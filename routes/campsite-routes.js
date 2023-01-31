@@ -58,64 +58,15 @@ router.get('/campsites', (req, res, next) => {
 // SHOW
 // GET /campsites/id
 router.get('/campsites/:id', (req, res, next) => {
-	// req.params.id will be set based on the `:id` in the route
 	Campsite.findById(req.params.id)
 		.then(handle404)
 		.then((campsite) => res.status(200).json({ campsite: campsite }))
 		.catch(next)
 })
 
-// CREATE
-// POST /campsites
-// router.post('/campsites', requireToken, (req, res, next) => {
-//     const campgroundId = req.body.campsite.campgroundId
 
-//     const campsite = req.body.campsite
-//     campsite.owner = req.user._id
 
-//     Campground.findById(campgroundId)
-//         .then(handle404)
-//         .then((campground) => {
-//             campground.campsites.push(req.body.campsite)
 
-//             return campground.save()
-//         })
-//         .then((campground) => res.status(201).json({campground : campground}))
-//         .catch(next)
-// 	// Campsite.create(req.body.campsite)
-// 	// 	.then((campsite) => {
-// 	// 		res.status(201).json({ campsite: campsite })
-// 	// 	})
-// 	// 	.catch(next)
-// })
 
-// UPDATE
-// PATCH /campsites/id
-router.patch('/campsites/:id', (req, res, next) => {
-	Campsite.findById(req.params.id)
-		.then(handle404)
-		.then((campsite) => {
-			return campsite.updateOne(req.body.campsite)
-		})
-		.then(() => res.sendStatus(204))
-		.catch(next)
-})
-
-// DESTROY
-// DELETE /campgrounds/id
-// router.delete('/campsites/:id', (req, res, next) => {
-// 	const campgroundId = req.body.campsite.campgroundId
-
-// 	Campground.findById(campgroundId)
-// 		.then(handle404)
-// 		.then((campground) => {
-// 			campground.campsite.id(req.params.campsiteId).remove(campsite)
-// 			// const campsite = campground.campsite.id(req.params.campsiteId)
-//             // campsite.remove(req.body.campsite)
-// 			return campground.save()
-// 		})
-// 		.then(() => res.sendStatus(204))
-// 		.catch(next)
-// })
 
 module.exports = router
