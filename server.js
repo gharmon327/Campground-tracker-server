@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 const db = require('./config/db')
-const PORT = 8002
+const PORT = process.env.PORT || 8002
 
 const campgroundRoutes = require('./routes/campground-routes')
 const campsiteRoutes = require('./routes/campsite-routes')
@@ -17,7 +17,7 @@ mongoose.connect(db, {
 })
 
 const app = express()
-app.use(cors({ origin: `http://127.0.0.1:5504` }))
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://127.0.0.1:5504` }))
 
 app.use(express.json())
 app.use(campgroundRoutes)
