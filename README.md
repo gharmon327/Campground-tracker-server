@@ -1,33 +1,29 @@
 # Campground-tracker-server
 
-## Wireframe
-![Campground Wireframe](images/Project%202%20(1).png)
+## Technologies Used
+- Javascript
+- HTML
+- CSS
+- Bootstrap
+- Node
+- Express
+- MongoDb
+- Mongoose
 
 ## ERD
 ![Campground-ERD](images/Project%202%20ERD%20(2).png)
 
-## User Stories
-**MVP**
-- As a user, I want to be able to sign up
-- As a user, I want to be able to sign in
-- As a user, I want to be able check if campsite is occupied or unnoccupied
-- As a user, I want to check in a campsite
-- As a user, I want to check out of campsite
-- As a user, I want to be able to check the status of all campsites
-- As a user, I want to view mulitple campgrounds
-- As an employee, I want to be able to check the status of all campsites
-- As an employee, I want to check user in a campsite
-- As an employee, I want to check user out of campsite
-- As an employee, I want to be able to set campground
-- As an employee, I want to be able to sign up
-- As an employee, I want to be able to sign in
+## Routes Table: ##
 
-**Version 2**
-- As a user, I want to make a reservation
-- As a user, I want to be able to pick my campsite
-- As a user, I want to reserve from mulitple campgrounds
-
-**Version 3**
-- As a user, I want to favorite campsites
-- As a user, I want to book multiple campsites
-- As a user, I want to have reoccuring reservations for certain times of year
+| Name        | Path                             |HTTP Verb    |Purpose                 |
+| ----------- | -------------------------------- | ----------- | ---------------------- |
+| Index       | /campgrounds/                    |GET          |Displays all campgrounds|
+| Create      | /campgrounds/                    |POST         |Creates new campground  |
+| Show        | /campgrounds/:Id                 |GET          |Displays one campground |
+| Update      | /campgrounds/:Id                 |PATCH        |Upates one campground   |
+| Delete      | /campgrounds/:Id                 |DELETE       |Deletes one campground  |
+| Create      | /campsites/:Id                   |POST         |Creates new campsite    |
+| Update      | /campsites/:id                   |DELETE       |updates one campsite    |
+| Index       | /campsites/:Id                   |GET          |Displays all campsites  |
+| SignUp      | /sign-up                         |POST         |Creates new login       |
+| SignIn      | /sign-in                         |POST         |Logs user in            |
