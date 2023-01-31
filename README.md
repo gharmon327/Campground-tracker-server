@@ -11,7 +11,7 @@
 - Mongoose
 
 ## ERD
-![Campground-ERD](image/Project%202%20ERD%20(3).png)
+![Campground-ERD](image/Project%202%20ERD%20(4).png)
 
 ## Routes Table: ##
 
